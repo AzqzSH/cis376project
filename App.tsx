@@ -1,20 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider as PaperProvider, MD3LightTheme } from 'react-native-paper';
+import { QueryClient, onlineManager, QueryClientProvider } from 'react-query';
+import RootRouter from './src/routes/RootRouter';
+import NetInfo from '@react-native-community/netinfo';
+
+const queryClient = new QueryClient();
+
+onlineManager.setEventListener((setOnline) => {
+	return NetInfo.addEventListener((state) => {
+		setOnline(!!state.isConnected);
+	});
+});
+
+onlineManager.isOnline();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	return (
+		<QueryClientProvider client={queryClient}>
+			<PaperProvider theme={MD3LightTheme}>
+				<StatusBar style="auto" />
+				<RootRouter />
+			</PaperProvider>
+		</QueryClientProvider>
+	);
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

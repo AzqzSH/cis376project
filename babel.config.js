@@ -1,6 +1,27 @@
-module.exports = function(api) {
-  api.cache(true);
-  return {
-    presets: ['babel-preset-expo'],
-  };
+module.exports = function (api) {
+	api.cache(true);
+	return {
+		presets: ['babel-preset-expo'],
+		plugins: [
+			[
+				'module-resolver',
+				{
+					alias: {
+						'@/shared-components': './src/shared-components',
+						'@/routes': './src/routes',
+						'@/hooks': './src/hooks',
+						'@/lib': './src/lib',
+						'@/api': './api',
+						'@/assets': './assets',
+					},
+					extensions: ['.js', '.jsx', '.ts', '.tsx'],
+				},
+			],
+		],
+		env: {
+			production: {
+				plugins: ['react-native-paper/babel'],
+			},
+		},
+	};
 };
