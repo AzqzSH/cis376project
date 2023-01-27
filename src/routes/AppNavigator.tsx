@@ -2,17 +2,28 @@ import React from 'react';
 import { HomePage } from './home';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { ThemeColors } from '@/lib/theme';
+import { Icon } from '@expo/vector-icons/build/createIconSet';
 
 export type AppNavigatorParamList = {
 	Home: undefined;
+	Achievements: undefined;
+	Leaderboard: undefined;
 };
 
 const AppTab = createBottomTabNavigator<AppNavigatorParamList>();
 
-const TAB_ICON: {
-	[x in keyof AppNavigatorParamList]: keyof typeof MaterialCommunityIcons['glyphMap'];
-} = {
+type TabNavigatorMap<T extends {}, K extends Icon<any, any>> = {
+	[x in keyof T]: keyof K['glyphMap'];
+};
+
+const TAB_ICON: TabNavigatorMap<
+	AppNavigatorParamList,
+	typeof MaterialCommunityIcons
+> = {
 	Home: 'map-marker-radius',
+	Achievements: 'trophy',
+	Leaderboard: 'equalizer',
 };
 
 export const AppNavigator = () => {
@@ -34,20 +45,23 @@ export const AppNavigator = () => {
 					),
 					tabBarShowLabel: false,
 					tabBarStyle: {
-						backgroundColor: '#012547',
+						backgroundColor: ThemeColors.primary,
 						shadowOpacity: 1,
 						shadowOffset: {
 							height: 5,
 							width: 0,
 						},
-						shadowColor: '#012547',
+						shadowColor: ThemeColors.primary,
 						shadowRadius: 10,
 					},
-					tabBarActiveTintColor: '#ffcb05',
+					tabBarActiveTintColor: ThemeColors.secondary,
 				};
 			}}
 		>
+			<AppTab.Screen name="Leaderboard" component={HomePage} />
+
 			<AppTab.Screen name="Home" component={HomePage} />
+			<AppTab.Screen name="Achievements" component={HomePage} />
 		</AppTab.Navigator>
 	);
 };

@@ -12,8 +12,6 @@ onlineManager.setEventListener((setOnline) => {
 	});
 });
 
-onlineManager.isOnline();
-
 export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
