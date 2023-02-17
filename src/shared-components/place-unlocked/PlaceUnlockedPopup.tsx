@@ -1,26 +1,31 @@
 import { PointOfInterest } from '@/api/points-of-interest';
+import { IModalProps } from '@/hooks/useModal';
 import { ThemeColors } from '@/lib/theme';
 import React from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import { Button, Divider, Modal, Portal, Text } from 'react-native-paper';
+import { FastImage } from '@/shared-components/fast-image';
 
-interface PlaceUnlockedPopupProps {
+interface PlaceUnlockedPopupProps extends IModalProps {
 	pointOfInterest: PointOfInterest;
 }
 
 const PlaceUnlockedPopup: React.FC<PlaceUnlockedPopupProps> = ({
 	pointOfInterest,
+	...modalProps
 }) => {
 	return (
 		<Portal>
 			<Modal
 				dismissable={true}
-				visible={true}
+				{...modalProps}
 				contentContainerStyle={{
 					backgroundColor: ThemeColors.primary,
 					padding: 10,
 					borderRadius: 10,
-					width: 350,
+					width: '100%',
+					minWidth: 350,
+					maxWidth: 400,
 					alignSelf: 'center',
 				}}
 			>
@@ -48,12 +53,14 @@ const PlaceUnlockedPopup: React.FC<PlaceUnlockedPopupProps> = ({
 						height: 150,
 					}}
 				>
-					<Image
-						source={require('@/assets/dummy.png')}
+					<FastImage
+						uri={pointOfInterest.images[0]}
 						style={{
 							width: '100%',
 							height: '100%',
 							borderRadius: 10,
+							borderWidth: 2,
+							borderColor: ThemeColors.secondary,
 						}}
 					/>
 				</View>
@@ -100,8 +107,8 @@ const PlaceUnlockedPopup: React.FC<PlaceUnlockedPopupProps> = ({
 					mode="contained"
 					style={{
 						borderRadius: 10,
-						backgroundColor: ThemeColors.secondary,
 					}}
+					onPress={() => {}}
 				>
 					<Text
 						style={{
