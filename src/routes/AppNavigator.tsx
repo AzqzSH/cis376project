@@ -4,6 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ThemeColors } from '@/lib/theme';
 import { Icon } from '@expo/vector-icons/build/createIconSet';
+import HomeScreenImages from './home_screen/HomeScreen';
 
 export type AppNavigatorParamList = {
 	Home: undefined;
@@ -58,7 +59,7 @@ export const AppNavigator = () => {
 				};
 			}}
 		>
-			<AppTab.Screen name="Leaderboard" component={HomePage} />
+			<AppTab.Screen name="Leaderboard" component={HomeScreenImages} />
 
 			<AppTab.Screen name="Home" component={HomePage} />
 			<AppTab.Screen name="Achievements" component={HomePage} />
