@@ -257,7 +257,7 @@ const format=StyleSheet.create({
         marginBottom:35,
         backgroundColor: ThemeColors.primary,
         flexDirection: 'column',
-        borderRadius:50
+        borderRadius:10
 
     },
     
