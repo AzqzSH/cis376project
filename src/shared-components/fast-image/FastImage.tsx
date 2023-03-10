@@ -13,7 +13,6 @@ const FastImage: React.FC<FastImageProps> = ({ uri, ...rest }) => {
 	const [image, setImage] = React.useState<ImageSourcePropType>(
 		require('@/assets/images/dummy.png')
 	);
-	const [loading, setLoading] = React.useState<boolean>(false);
 
 	const loadImage = useCallback(async () => {
 		const name = shortHash(uri);
@@ -22,16 +21,14 @@ const FastImage: React.FC<FastImageProps> = ({ uri, ...rest }) => {
 		const image = await FileSystem.getInfoAsync(path);
 
 		if (!image.exists) {
-			setLoading(true);
-
 			try {
 				const newImage = await FileSystem.downloadAsync(uri, path);
 
 				if (newImage.status === 200) {
 					setImage({ uri: newImage.uri });
 				}
-			} finally {
-				setLoading(false);
+			} catch (error) {
+				console.log(error);
 			}
 		} else {
 			setImage({ uri: image.uri });

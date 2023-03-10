@@ -3,7 +3,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ThemeColors } from '@/lib/theme';
 import { Icon } from '@expo/vector-icons/build/createIconSet';
-import { HomeScreen } from './home-screen';
+import { HomeScreen } from './home_screen';
 import { LocationsStack } from './locations-stack';
 
 export type AppNavigatorParamList = {

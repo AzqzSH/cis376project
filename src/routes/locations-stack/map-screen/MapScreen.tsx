@@ -1,6 +1,7 @@
 import { type PointOfInterest, getLocations } from '@/api/points-of-interest';
 import { useGetLocations } from '@/api/points-of-interest/getLocations';
 import { useModal } from '@/hooks/useModal';
+import { useStore, useStoreSetter, useStoreValue } from '@/lib/store';
 import { ThemeColors } from '@/lib/theme';
 import { ScreenProps } from '@/routes/types';
 import { Icon } from '@/shared-components/icon';
@@ -12,7 +13,7 @@ import React from 'react';
 import { View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { Text } from 'react-native-paper';
-import { LocationsStackParamList } from '../LocationsStack';
+import { LocationsStackParamList, test, test3 } from '../LocationsStack';
 
 interface MapScreenProps extends ScreenProps<LocationsStackParamList, 'Map'> {}
 
@@ -120,7 +121,9 @@ const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
 					flexDirection: 'row',
 					paddingHorizontal: 20,
 				}}
-				onPress={() => navigation.navigate('List')}
+				onPress={() => {
+					navigation.navigate('List');
+				}}
 			>
 				<Icon as={Feather} name="list" size={24} color="black" />
 				<Text

@@ -1,3 +1,4 @@
+import { computedStore, store } from '@/lib/store';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { Portal } from 'react-native-paper';
@@ -10,6 +11,11 @@ export type LocationsStackParamList = {
 };
 
 const Stack = createNativeStackNavigator<LocationsStackParamList>();
+
+export const test = store(1);
+export const test2 = store(2);
+
+export const test3 = computedStore((get) => get(test) + get(test2));
 
 export const LocationsStack = () => {
 	return (
