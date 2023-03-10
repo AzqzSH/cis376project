@@ -1,51 +1,27 @@
-import { PointOfInterest } from '@/api/points-of-interest';
+import { type PointOfInterest, getLocations } from '@/api/points-of-interest';
+import { useGetLocations } from '@/api/points-of-interest/getLocations';
 import { useModal } from '@/hooks/useModal';
 import { ThemeColors } from '@/lib/theme';
+import { ScreenProps } from '@/routes/types';
 import { Icon } from '@/shared-components/icon';
 import { IconButton } from '@/shared-components/icon-button';
+import LoadingOverlay from '@/shared-components/loading-overlay/LoadingOverlay';
 import PlaceUnlockedPopup from '@/shared-components/place-unlocked/PlaceUnlockedPopup';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
-import MapView, { Marker, Overlay } from 'react-native-maps';
-import { Surface } from 'react-native-paper';
+import { View } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
+import { Text } from 'react-native-paper';
+import { LocationsStackParamList } from '../LocationsStack';
 
-const locations = [
-	{
-		id: '1',
-		name: 'Library Front Desk',
-		images: [
-			'https://cdn.discordapp.com/attachments/1062450289468252306/1073368897178325214/PXL_20230209_221716344.jpg',
-		],
-		latitude: 42.3182,
-		longitude: -83.2326,
-	},
-	{
-		id: '2',
-		name: 'ELB',
-		images: [
-			'https://cdn.discordapp.com/attachments/1062450289468252306/1073368869151985714/PXL_20230209_222156768.MP.jpg',
-		],
-		latitude: 42.3196,
-		longitude: -83.234,
-	},
-	{
-		id: '3',
-		name: 'University Center',
-		images: [
-			'https://cdn.discordapp.com/attachments/1062450289468252306/1073368898134605844/PXL_20230209_221345249.jpg',
-		],
-		latitude: 42.3167,
-		longitude: -83.2312,
-	},
-];
+interface MapScreenProps extends ScreenProps<LocationsStackParamList, 'Map'> {}
 
-interface HomePageProps {}
-
-export const HomePage: React.FC<HomePageProps> = ({}) => {
+const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
 	const { show: showLocationUnlocked, ...locationUnlockedModal } = useModal();
 
 	const [location, setLocation] = React.useState<PointOfInterest>();
+
+	const { data: locations, isFetching: loading } = useGetLocations();
 
 	return (
 		<View
@@ -53,6 +29,8 @@ export const HomePage: React.FC<HomePageProps> = ({}) => {
 				flex: 1,
 			}}
 		>
+			<LoadingOverlay visible={loading} />
+
 			<View
 				style={{
 					position: 'absolute',
@@ -105,21 +83,7 @@ export const HomePage: React.FC<HomePageProps> = ({}) => {
 				}}
 				provider="google"
 			>
-				{/* <Overlay
-					image={{
-						uri: 'https://umdearborn.edu/sites/default/files/styles/open_graph/public/2022-08/campusMap_forWeb.jpg?itok=2qxbb487',
-					}}
-					bounds={[
-						[42.32, -83.24],
-						[42.31, -83.22],
-					]}
-					onPress={() => console.log('Pressed')}
-					pointerEvents="auto"
-					tappable
-					onTouchEnd={() => console.log('Touched')}
-				/> */}
-
-				{locations.map((location) => (
+				{locations?.map((location) => (
 					<Marker
 						key={location.id}
 						coordinate={{
@@ -141,6 +105,37 @@ export const HomePage: React.FC<HomePageProps> = ({}) => {
 					{...locationUnlockedModal}
 				/>
 			)}
+
+			<IconButton
+				style={{
+					position: 'absolute',
+					zIndex: 50,
+					bottom: 20,
+					alignSelf: 'center',
+				}}
+				contentStyle={{
+					height: '100%',
+					justifyContent: 'center',
+					alignItems: 'center',
+					flexDirection: 'row',
+					paddingHorizontal: 20,
+				}}
+				onPress={() => navigation.navigate('List')}
+			>
+				<Icon as={Feather} name="list" size={24} color="black" />
+				<Text
+					style={{
+						fontSize: 16,
+						fontWeight: 'bold',
+						marginLeft: 10,
+						textAlign: 'center',
+					}}
+				>
+					List View
+				</Text>
+			</IconButton>
 		</View>
 	);
 };
+
+export default MapScreen;
