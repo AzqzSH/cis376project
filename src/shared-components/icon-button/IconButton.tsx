@@ -2,18 +2,30 @@ import React from 'react';
 import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { Surface } from 'react-native-paper';
 
-interface IconButtonProps {
-	icon: React.ReactNode;
+interface BaseIconButtonProps {
 	onPress?: () => void;
 	style?: StyleProp<ViewStyle>;
 	contentStyle?: StyleProp<ViewStyle>;
 }
 
+interface IconButtonWithIconProps extends BaseIconButtonProps {
+	icon: React.ReactNode;
+	children?: never;
+}
+
+interface IconButtonWithChildrenProps extends BaseIconButtonProps {
+	children: React.ReactNode;
+	icon?: never;
+}
+
+type IconButtonProps = IconButtonWithIconProps | IconButtonWithChildrenProps;
+
 const IconButton: React.FC<IconButtonProps> = ({
-	icon,
 	contentStyle,
 	onPress,
 	style,
+	children,
+	icon,
 }) => {
 	return (
 		<TouchableOpacity onPress={onPress} style={style} activeOpacity={0.5}>
@@ -26,7 +38,7 @@ const IconButton: React.FC<IconButtonProps> = ({
 					...(contentStyle as any),
 				}}
 			>
-				{icon}
+				{icon || children}
 			</Surface>
 		</TouchableOpacity>
 	);
