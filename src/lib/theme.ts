@@ -4,6 +4,7 @@ import { DefaultTheme as PaperTheme } from 'react-native-paper';
 export const ThemeColors = {
 	primary: '#012547',
 	secondary: '#ffcb05',
+	disabled: '#c4c4c4',
 } as const;
 
 export const paperTheme = {

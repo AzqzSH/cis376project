@@ -1,17 +1,18 @@
 import { useGetLocations } from '@/api/points-of-interest/getLocations';
+import { useStore, useStoreSetter, useStoreValue } from '@/lib/store';
 import { ThemeColors } from '@/lib/theme';
 import { ScreenProps } from '@/routes/types';
-import { FastImage } from '@/shared-components/fast-image';
 import { Icon } from '@/shared-components/icon';
 import { IconButton } from '@/shared-components/icon-button';
 import LoadingOverlay from '@/shared-components/loading-overlay/LoadingOverlay';
 import { Feather } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { Divider, Text, Title } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LocationsStackParamList } from '../LocationsStack';
+import { LocationListItem } from './LocationListItem';
 
 interface LocationsListScreenProps
 	extends ScreenProps<LocationsStackParamList, 'List'> {}
@@ -35,20 +36,8 @@ const LocationsListScreen: React.FC<LocationsListScreenProps> = ({
 			<View style={styles.content}>
 				<FlatList
 					data={locations}
-					renderItem={({ item }) => (
-						<TouchableOpacity style={styles.listItem}>
-							<FastImage
-								uri={item.images[0]}
-								style={styles.listItemImage}
-							/>
-
-							<View style={styles.listItemContent}>
-								<Text style={styles.listItemTitle}>
-									{item.name}
-								</Text>
-							</View>
-						</TouchableOpacity>
-					)}
+					renderItem={({ item }) => <LocationListItem info={item} />}
+					keyExtractor={(item) => item.id}
 					ItemSeparatorComponent={() => (
 						<Divider
 							style={{
@@ -74,7 +63,9 @@ const LocationsListScreen: React.FC<LocationsListScreenProps> = ({
 					flexDirection: 'row',
 					paddingHorizontal: 20,
 				}}
-				onPress={() => navigation.navigate('Map')}
+				onPress={() => {
+					navigation.navigate('Map');
+				}}
 			>
 				<Icon as={Feather} name="map-pin" size={24} color="black" />
 				<Text
@@ -113,30 +104,6 @@ const styles = StyleSheet.create({
 	content: {
 		height: '100%',
 		backgroundColor: 'white',
-	},
-	listItem: {
-		display: 'flex',
-		flexDirection: 'row',
-		alignItems: 'center',
-		padding: 20,
-		height: 100,
-	},
-	listItemImage: {
-		width: 100,
-		height: '100%',
-		borderRadius: 10,
-		borderWidth: 2,
-		borderColor: ThemeColors.secondary,
-	},
-	listItemContent: {
-		display: 'flex',
-		flexDirection: 'column',
-		marginLeft: 20,
-	},
-	listItemTitle: {
-		fontSize: 16,
-		fontWeight: 'bold',
-		color: ThemeColors.primary,
 	},
 });
 
