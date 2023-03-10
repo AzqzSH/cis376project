@@ -13,7 +13,7 @@ import React from 'react';
 import { View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { Text } from 'react-native-paper';
-import { LocationsStackParamList, test, test3 } from '../LocationsStack';
+import { LocationsStackParamList } from '../LocationsStack';
 
 interface MapScreenProps extends ScreenProps<LocationsStackParamList, 'Map'> {}
 

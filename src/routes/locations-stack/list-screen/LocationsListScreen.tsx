@@ -11,7 +11,7 @@ import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { Divider, Text, Title } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LocationsStackParamList, test, test2, test3 } from '../LocationsStack';
+import { LocationsStackParamList } from '../LocationsStack';
 import { LocationListItem } from './LocationListItem';
 
 interface LocationsListScreenProps
