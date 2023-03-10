@@ -136,12 +136,12 @@ const format = StyleSheet.create({
 		textAlign: 'center',
 		fontSize: 11,
 		fontWeight: 'bold',
-		color: ThemeColors.primary,
+		color: ThemeColors.secondary,
 	},
 	button: {
-		backgroundColor: ThemeColors.secondary, // need to take out the background color to make the button ripple effect work
+		//backgroundColor: ThemeColors.secondary, // need to take out the background color to make the button ripple effect work
 		borderColor: ThemeColors.secondary,
-		borderWidth: 0.2,
+		borderWidth: .2,
 		borderRadius: 5,
 		maxHeight: 40,
 		bottom: -10,
