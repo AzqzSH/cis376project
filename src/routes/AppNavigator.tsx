@@ -1,9 +1,12 @@
 import React from 'react';
 import { HomePage } from './home';
+import { HelpPage } from './help';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ThemeColors } from '@/lib/theme';
 import { Icon } from '@expo/vector-icons/build/createIconSet';
+import { Button, View } from 'react-native';
 
 export type AppNavigatorParamList = {
 	Home: undefined;
@@ -12,6 +15,7 @@ export type AppNavigatorParamList = {
 };
 
 const AppTab = createBottomTabNavigator<AppNavigatorParamList>();
+const Stack = createNativeStackNavigator();
 
 type TabNavigatorMap<T extends {}, K extends Icon<any, any>> = {
 	[x in keyof T]: keyof K['glyphMap'];
@@ -28,6 +32,7 @@ const TAB_ICON: TabNavigatorMap<
 
 export const AppNavigator = () => {
 	return (
+
 		<AppTab.Navigator
 			initialRouteName="Home"
 			screenOptions={({ route }) => {
@@ -58,8 +63,7 @@ export const AppNavigator = () => {
 				};
 			}}
 		>
-			<AppTab.Screen name="Leaderboard" component={HomePage} />
-
+			<AppTab.Screen name="Leaderboard" component={HelpPage} />
 			<AppTab.Screen name="Home" component={HomePage} />
 			<AppTab.Screen name="Achievements" component={HomePage} />
 		</AppTab.Navigator>
