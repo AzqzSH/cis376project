@@ -2,7 +2,7 @@ import { style } from "@mui/system";
 import React from "react";
 import {Text, StyleSheet, ScrollView} from "react-native";
 
-export const HelpPage = () => {
+export function HelpPage() {
   const helpTitleText = "Game Information";
   const helpIntroParagraph = "\tWelcome to Explore Campus! This game is designed to encourage the exploration of the wonderful University of Michigan Dearborn. The premise of the game is simple: go to different places on campus, unlock awards and get achievements!"
   const helpStarterParagraph = "\tTo start enable locations permissions for this app. When you reach reward locations, you will automatically recieve awards. When the right combinations of locations are found, you will then unlock an achievement!"

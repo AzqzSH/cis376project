@@ -53,44 +53,6 @@ export const HomePage: React.FC<HomePageProps> = ({}) => {
 				flex: 1,
 			}}
 		>
-			<View
-				style={{
-					position: 'absolute',
-					top: 40,
-					right: 0,
-					padding: 10,
-					zIndex: 999,
-					display: 'flex',
-					flexDirection: 'row',
-					justifyContent: 'flex-end',
-				}}
-			>
-				<IconButton
-					onPress={() => console.log('Pressed')}
-					icon={
-						<Icon
-							as={MaterialCommunityIcons}
-							name="map-marker-question-outline"
-							size={25}
-						/>
-					}
-				/>
-
-				<IconButton
-					style={{
-						marginLeft: 10,
-					}}
-					onPress={() => console.log('Pressed')}
-					icon={
-						<Icon
-							as={MaterialCommunityIcons}
-							name="cog"
-							size={25}
-						/>
-					}
-				/>
-			</View>
-
 			<MapView
 				style={{
 					width: '100%',
