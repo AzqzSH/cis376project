@@ -117,7 +117,11 @@ const NavButtons = () =>{
 )}
 export const AppNavigator = () => {
 	return (
-		<Stack.Navigator>
+		<Stack.Navigator 
+		screenOptions={{
+			headerTintColor: ThemeColors.secondary,
+			headerStyle: { backgroundColor: ThemeColors.primary },
+		  }}>
 			<Stack.Screen component= {Tabs} name="ExploreCampus" options={({ navigation, route }: any) => ({
           headerRight: NavButtons
         })}/>
