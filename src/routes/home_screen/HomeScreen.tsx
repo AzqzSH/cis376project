@@ -6,12 +6,18 @@ import { Text, Button } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { ThemeColors } from '@/lib/theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
 
 const HomeScreenImages = () => {
+	const navigation : any = useNavigation();
+
 	return (
 		<View style={format.main}>
 			<View style={format.topbar}>
 				<IconButton
+				onPress={() =>
+					navigation.navigate('Help')}
 					icon={
 						<Icon
 							as={MaterialCommunityIcons}

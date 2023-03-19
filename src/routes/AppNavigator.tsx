@@ -1,6 +1,7 @@
 import React from 'react';
- import { HomePage } from './home';
+ import { HomeScreen } from './home_screen';
  import { HelpPage } from './help';
+ import { LocationsStack } from './locations-stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -120,12 +121,9 @@ export const AppNavigator = () => {
 	return (
 		<Stack.Navigator 
 		screenOptions={{
-			headerTintColor: ThemeColors.secondary,
-			headerStyle: { backgroundColor: ThemeColors.primary },
+			headerShown : false
 		  }}>
-			<Stack.Screen component= {Tabs} name="ExploreCampus" options={({ navigation, route }: any) => ({
-          headerRight: NavButtons
-        })}/>
+			<Stack.Screen component= {Tabs} name="ExploreCampus" />
 			<Stack.Screen component = {HelpPage} name = "Help" options={({ navigation, route }: any) => ({
           headerRight: NavButtons
         })}/>
