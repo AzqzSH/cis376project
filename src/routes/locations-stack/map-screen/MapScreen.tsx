@@ -14,7 +14,6 @@ import { View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { Text } from 'react-native-paper';
 import { LocationsStackParamList } from '../LocationsStack';
-import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -26,8 +25,6 @@ const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
 	const [location, setLocation] = React.useState<PointOfInterest>();
 
 	const { data: locations, isFetching: loading } = useGetLocations();
-
-	const reactNativeNavigation : any = useNavigation();
 
 
 	return (
@@ -52,7 +49,7 @@ const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
 			>
 				<IconButton
 					onPress={() =>
-						reactNativeNavigation.navigate('Help')}
+						navigation.navigate('Help')}
 					icon={
 						<Icon
 							as={MaterialCommunityIcons}
