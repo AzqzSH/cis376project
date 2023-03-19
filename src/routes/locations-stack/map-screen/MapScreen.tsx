@@ -15,6 +15,8 @@ import MapView, { Marker } from 'react-native-maps';
 import { Text } from 'react-native-paper';
 import { LocationsStackParamList } from '../LocationsStack';
 
+
+
 interface MapScreenProps extends ScreenProps<LocationsStackParamList, 'Map'> {}
 
 const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
@@ -23,6 +25,7 @@ const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
 	const [location, setLocation] = React.useState<PointOfInterest>();
 
 	const { data: locations, isFetching: loading } = useGetLocations();
+
 
 	return (
 		<View
@@ -45,7 +48,8 @@ const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
 				}}
 			>
 				<IconButton
-					onPress={() => console.log('Pressed')}
+					onPress={() =>
+						navigation.navigate('Help')}
 					icon={
 						<Icon
 							as={MaterialCommunityIcons}

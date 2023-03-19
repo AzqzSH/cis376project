@@ -9,7 +9,10 @@
 		"web": "expo start --web"
 	},
 	"dependencies": {
+		"@emotion/react": "^11.10.6",
+		"@emotion/styled": "^11.10.6",
 		"@expo/vector-icons": "^13.0.0",
+		"@mui/material": "^5.11.13",
 		"@react-native-community/netinfo": "9.3.5",
 		"@react-navigation/bottom-tabs": "^6.5.3",
 		"@react-navigation/native": "^6.1.2",
@@ -17,6 +20,7 @@
 		"expo": "~47.0.12",
 		"expo-file-system": "~15.1.1",
 		"expo-status-bar": "~1.4.2",
+		"mui": "^0.0.1",
 		"react": "18.1.0",
 		"react-dom": "18.1.0",
 		"react-native": "0.70.5",

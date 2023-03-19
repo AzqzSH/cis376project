@@ -1,26 +1,35 @@
 import React from 'react';
+ import { HomeScreen } from './home_screen';
+ import { HelpPage } from './help';
+ import { LocationsStack } from './locations-stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ThemeColors } from '@/lib/theme';
 import { Icon } from '@expo/vector-icons/build/createIconSet';
-import { HomeScreen } from './home_screen';
-import { LocationsStack } from './locations-stack';
+import { Button, View } from 'react-native';
+ import { Icon as ButtonIcon } from '@/shared-components/icon';
+import { IconButton } from '@/shared-components/icon-button';
+import { useNavigation } from '@react-navigation/native';
 
-export type AppNavigatorParamList = {
+export type AppNavigatorParamListTabs = {
 	Home: undefined;
 	Achievements: undefined;
 	Leaderboard: undefined;
 	HomeScreen: undefined;
 };
 
-const AppTab = createBottomTabNavigator<AppNavigatorParamList>();
+const AppTab = createBottomTabNavigator<AppNavigatorParamListTabs>();
+const Stack = createNativeStackNavigator();
+
 
 type TabNavigatorMap<T extends {}, K extends Icon<any, any>> = {
 	[x in keyof T]: keyof K['glyphMap'];
 };
 
+
 const TAB_ICON: TabNavigatorMap<
-	AppNavigatorParamList,
+	AppNavigatorParamListTabs,
 	typeof MaterialCommunityIcons
 > = {
 	Home: 'map-marker-radius',
@@ -29,9 +38,9 @@ const TAB_ICON: TabNavigatorMap<
 	HomeScreen: 'home'
 };
 
-export const AppNavigator = () => {
-	return (
-		<AppTab.Navigator
+
+const Tabs = () => (
+<AppTab.Navigator
 			initialRouteName="Home"
 			screenOptions={({ route }) => {
 				const icon = TAB_ICON[route.name];
@@ -66,5 +75,61 @@ export const AppNavigator = () => {
 			<AppTab.Screen name="Home" component={LocationsStack} />
 			<AppTab.Screen name="Achievements" component={LocationsStack} />
 		</AppTab.Navigator>
+	 );
+
+const NavButtons = () =>{
+	const navigation : any = useNavigation();
+
+	
+	return(
+<View style={{
+				position: 'absolute',
+				right: 0,
+				zIndex: 999,
+				display: 'flex',
+				flexDirection: 'row',
+				justifyContent: 'flex-end',
+			}}>
+			<IconButton
+				onPress={() =>
+					navigation.navigate('Help')}
+				style={{
+					paddingRight: 10,
+				}}
+				icon={
+					<ButtonIcon
+						as={MaterialCommunityIcons}
+						name="map-marker-question-outline"
+						size={23}
+					/>
+				}
+			/>
+			<IconButton
+					onPress={() => console.log("Pressed")}
+					icon={
+						<ButtonIcon
+							as={MaterialCommunityIcons}
+							name="cog"
+							size={23}
+						/>
+					}
+				/>
+				</View>
+	
+)}
+export const AppNavigator = () => {
+	return (
+		<Stack.Navigator 
+		screenOptions={{
+			headerShown : false
+		  }}>
+			<Stack.Screen component= {Tabs} name="ExploreCampus" />
+			<Stack.Screen component = {HelpPage} name = "Help" options={({ navigation, route }: any) => ({
+          headerRight: NavButtons
+        })}/>
+			<Stack.Screen component = {HelpPage} name = "Settings" options={({ navigation, route }: any) => ({
+          headerRight: NavButtons
+        })}/>
+      </Stack.Navigator>
 	);
 };

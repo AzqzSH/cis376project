@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
+import { View } from 'react-native';
 import { AppNavigator } from './AppNavigator';
 import { AuthNavigator } from './AuthNavigator';
 
@@ -16,3 +17,4 @@ const RootRouter: React.FC<RootRouterProps> = ({}) => {
 };
 
 export default RootRouter;
+
