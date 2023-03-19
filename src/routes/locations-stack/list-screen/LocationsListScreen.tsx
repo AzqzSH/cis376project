@@ -1,11 +1,13 @@
 import { useGetLocations } from '@/api/points-of-interest/getLocations';
 import { useStore, useStoreSetter, useStoreValue } from '@/lib/store';
 import { ThemeColors } from '@/lib/theme';
+import { BottomTabScreenProps } from '@/routes/BottomTabNavigator';
 import { ScreenProps } from '@/routes/types';
 import { Icon } from '@/shared-components/icon';
 import { IconButton } from '@/shared-components/icon-button';
 import LoadingOverlay from '@/shared-components/loading-overlay/LoadingOverlay';
 import { Feather } from '@expo/vector-icons';
+import { CompositeScreenProps } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
@@ -15,7 +17,10 @@ import { LocationsStackParamList } from '../LocationsStack';
 import { LocationListItem } from './LocationListItem';
 
 interface LocationsListScreenProps
-	extends ScreenProps<LocationsStackParamList, 'List'> {}
+	extends CompositeScreenProps<
+		ScreenProps<LocationsStackParamList, 'List'>,
+		BottomTabScreenProps<'Map'>
+	> {}
 
 const LocationsListScreen: React.FC<LocationsListScreenProps> = ({
 	navigation,
