@@ -15,7 +15,7 @@ export type AppNavigatorParamListTabs = {
 	Home: undefined;
 	Achievements: undefined;
 	Leaderboard: undefined;
-
+	HomeScreen: undefined;
 };
 
 const AppTab = createBottomTabNavigator<AppNavigatorParamListTabs>();
@@ -34,7 +34,7 @@ const TAB_ICON: TabNavigatorMap<
 	Home: 'map-marker-radius',
 	Achievements: 'trophy',
 	Leaderboard: 'equalizer',
-
+	HomeScreen: 'home'
 };
 
 
@@ -69,9 +69,10 @@ const Tabs = () => (
 				};
 			}}
 		>
-			<AppTab.Screen name="Leaderboard" component={HomePage} />
-			<AppTab.Screen name="Home" component={HomePage} />
-			<AppTab.Screen name="Achievements" component={HomePage} />
+			<AppTab.Screen name="HomeScreen" component={HomeScreen} />
+			<AppTab.Screen name="Leaderboard" component={HomeScreen} />
+			<AppTab.Screen name="Home" component={LocationsStack} />
+			<AppTab.Screen name="Achievements" component={LocationsStack} />
 		</AppTab.Navigator>
 	 );
 

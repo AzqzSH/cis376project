@@ -1,7 +1,3 @@
-export type PointOfInterest = {
-	id: string;
-	name: string;
-	images: string[];
-	latitude: number;
-	longitude: number;
-};
+export * from './types';
+
+export { getLocations } from './getLocations';
