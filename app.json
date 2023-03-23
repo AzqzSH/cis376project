@@ -4,7 +4,7 @@
 		"slug": "explore-campus",
 		"version": "1.0.0",
 		"orientation": "portrait",
-		"icon": "./assets/icon-square.png",
+		"icon": "./assets/icon-app.png",
 		"userInterfaceStyle": "light",
 		"splash": {
 			"image": "./assets/logo.png",
