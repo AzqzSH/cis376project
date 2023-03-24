@@ -11,6 +11,7 @@ import { Button, View } from 'react-native';
  import { Icon as ButtonIcon } from '@/shared-components/icon';
 import { IconButton } from '@/shared-components/icon-button';
 import { useNavigation } from '@react-navigation/native';
+import {AchievementsPage } from './achievements';
 
 export type AppNavigatorParamListTabs = {
 	Home: undefined;
@@ -73,7 +74,7 @@ const Tabs = () => (
 			<AppTab.Screen name="HomeScreen" component={HomeScreen} />
 			<AppTab.Screen name="Leaderboard" component={HomeScreen} />
 			<AppTab.Screen name="Home" component={LocationsStack} />
-			<AppTab.Screen name="Achievements" component={LocationsStack} />
+			<AppTab.Screen name="Achievements" component={AchievementsPage} />
 		</AppTab.Navigator>
 	 );
 
