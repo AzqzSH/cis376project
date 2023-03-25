@@ -3,6 +3,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Icon } from '@expo/vector-icons/build/createIconSet';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
+import { AchievementScreen } from './achievements-screen';
 import { MainStackNavigatorParamList } from './AppNavigator';
 import { HomeScreen } from './home_screen';
 import { LocationsStack } from './locations-stack';
@@ -71,6 +72,6 @@ export const BottomTabNavigator = () => (
 		<BottomTab.Screen name="HomeScreen" component={HomeScreen} />
 		<BottomTab.Screen name="Leaderboard" component={LocationsStack} />
 		<BottomTab.Screen name="Map" component={LocationsStack} />
-		<BottomTab.Screen name="Achievements" component={LocationsStack} />
+		<BottomTab.Screen name="Achievements" component={AchievementScreen} />
 	</BottomTab.Navigator>
 );
