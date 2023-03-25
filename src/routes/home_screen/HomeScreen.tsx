@@ -6,18 +6,23 @@ import { Text, Button } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { ThemeColors } from '@/lib/theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { ScreenProps } from '../types';
+import { MainStackNavigatorParamList } from '../AppNavigator';
+import { BottomTabParamList } from '../BottomTabNavigator';
 
+interface HomeScreenProps
+	extends CompositeScreenProps<
+		ScreenProps<BottomTabParamList, 'HomeScreen'>,
+		ScreenProps<MainStackNavigatorParamList, 'ExploreCampus'>
+	> {}
 
-const HomeScreenImages = () => {
-	const navigation : any = useNavigation();
-
+const HomeScreenImages: React.FC<HomeScreenProps> = ({ navigation }) => {
 	return (
 		<View style={format.main}>
 			<View style={format.topbar}>
 				<IconButton
-				onPress={() =>
-					navigation.navigate('Help')}
+					onPress={() => navigation.navigate('Help')}
 					icon={
 						<Icon
 							as={MaterialCommunityIcons}
@@ -147,7 +152,7 @@ const format = StyleSheet.create({
 	button: {
 		//backgroundColor: ThemeColors.secondary, // need to take out the background color to make the button ripple effect work
 		borderColor: ThemeColors.secondary,
-		borderWidth: .2,
+		borderWidth: 0.2,
 		borderRadius: 5,
 		maxHeight: 40,
 		bottom: -10,

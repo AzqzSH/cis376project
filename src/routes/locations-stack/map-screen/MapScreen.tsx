@@ -3,21 +3,25 @@ import { useGetLocations } from '@/api/points-of-interest/getLocations';
 import { useModal } from '@/hooks/useModal';
 import { useStore, useStoreSetter, useStoreValue } from '@/lib/store';
 import { ThemeColors } from '@/lib/theme';
+import { BottomTabScreenProps } from '@/routes/BottomTabNavigator';
 import { ScreenProps } from '@/routes/types';
 import { Icon } from '@/shared-components/icon';
 import { IconButton } from '@/shared-components/icon-button';
 import LoadingOverlay from '@/shared-components/loading-overlay/LoadingOverlay';
 import PlaceUnlockedPopup from '@/shared-components/place-unlocked/PlaceUnlockedPopup';
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+import { CompositeScreenProps } from '@react-navigation/native';
 import React from 'react';
 import { View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { Text } from 'react-native-paper';
 import { LocationsStackParamList } from '../LocationsStack';
 
-
-
-interface MapScreenProps extends ScreenProps<LocationsStackParamList, 'Map'> {}
+interface MapScreenProps
+	extends CompositeScreenProps<
+		ScreenProps<LocationsStackParamList, 'Map'>,
+		BottomTabScreenProps<'Map'>
+	> {}
 
 const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
 	const { show: showLocationUnlocked, ...locationUnlockedModal } = useModal();
@@ -25,7 +29,6 @@ const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
 	const [location, setLocation] = React.useState<PointOfInterest>();
 
 	const { data: locations, isFetching: loading } = useGetLocations();
-
 
 	return (
 		<View
@@ -48,8 +51,7 @@ const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
 				}}
 			>
 				<IconButton
-					onPress={() =>
-						navigation.navigate('Help')}
+					onPress={() => navigation.navigate('Help')}
 					icon={
 						<Icon
 							as={MaterialCommunityIcons}

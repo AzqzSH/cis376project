@@ -16,7 +16,7 @@ export const LocationListItem: React.FC<LocationListItemProps> = ({
 }) => {
 	return (
 		<TouchableOpacity style={styles.listItem}>
-			<FastImage uri={info.images[0]} style={styles.listItemImage} />
+			<FastImage uri={info.image} style={styles.listItemImage} />
 
 			<View style={styles.listItemContent}>
 				<Text style={styles.listItemTitle}>{info.name}</Text>

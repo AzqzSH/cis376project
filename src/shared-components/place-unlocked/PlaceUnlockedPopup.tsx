@@ -54,7 +54,7 @@ const PlaceUnlockedPopup: React.FC<PlaceUnlockedPopupProps> = ({
 					}}
 				>
 					<FastImage
-						uri={pointOfInterest.images[0]}
+						uri={pointOfInterest.image}
 						style={{
 							width: '100%',
 							height: '100%',
