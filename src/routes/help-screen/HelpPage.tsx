@@ -13,7 +13,7 @@ const helpNavigationSettingsParagraph = `\tYou will also notice in the upper rig
 const locationsTitleText = 'Locations';
 const helpLocationsInfoParagraph = `\tLocations can be unlocked by walking around campus to different buildings, rooms, and locations. Many locations are listed on the locations page. Others are hidden, and will only be revealed when you find them.`;
 
-const achievementsTitleText = 'Achivements';
+const achievementsTitleText = 'Achievements';
 const helpAchivementsInfoParagraph = `\tAchivements can be earned by finding specific combinations of locations, or traveling to different locations at different times. Similar to locations, some achievements list what you need to do to get them, while others are mysteries that you will only uncover once you meet their conditions.`;
 
 export function HelpPage() {
