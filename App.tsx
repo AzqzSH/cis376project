@@ -5,6 +5,8 @@ import RootRouter from './src/routes/RootRouter';
 import NetInfo from '@react-native-community/netinfo';
 import { paperTheme } from '@/lib/theme';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AuthProvider } from '@/context/AuthProvider';
+import '@/lib/interceptors';
 
 const queryClient = new QueryClient();
 
@@ -18,15 +20,17 @@ export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<PaperProvider theme={paperTheme}>
-				<SafeAreaProvider>
-					<StatusBar
-						translucent
-						networkActivityIndicatorVisible
-						animated
-						style="dark"
-					/>
-					<RootRouter />
-				</SafeAreaProvider>
+				<AuthProvider>
+					<SafeAreaProvider>
+						<StatusBar
+							translucent
+							networkActivityIndicatorVisible
+							animated
+							style="dark"
+						/>
+						<RootRouter />
+					</SafeAreaProvider>
+				</AuthProvider>
 			</PaperProvider>
 		</QueryClientProvider>
 	);

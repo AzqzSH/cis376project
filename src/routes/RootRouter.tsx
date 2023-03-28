@@ -1,20 +1,19 @@
+import { useAuth } from '@/context/AuthProvider';
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import { View } from 'react-native';
 import { AppNavigator } from './AppNavigator';
 import { AuthNavigator } from './AuthNavigator';
 
 interface RootRouterProps {}
 
 const RootRouter: React.FC<RootRouterProps> = ({}) => {
-	const isAuthenticated = true;
+	const { user } = useAuth();
 
 	return (
 		<NavigationContainer>
-			{isAuthenticated ? <AppNavigator /> : <AuthNavigator />}
+			{user ? <AppNavigator /> : <AuthNavigator />}
 		</NavigationContainer>
 	);
 };
 
 export default RootRouter;
-

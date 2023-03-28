@@ -13,6 +13,7 @@ module.exports = function (api) {
 						'@/lib': './src/lib',
 						'@/api': './src/api',
 						'@/assets': './assets',
+						'@/context': './src/context',
 					},
 					extensions: ['.js', '.jsx', '.ts', '.tsx'],
 				},
