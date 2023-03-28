@@ -63,24 +63,26 @@ const AchievementScreen: React.FC<AchievementScreenProps> = ({}) => {
 								No achievements
 							</Text>
 						)}
-						renderItem={({ item }) => (
-							<TouchableOpacity>
-								<View
-									style={[
-										format.row,
-										{
-											...(!item.isUnlocked &&
-												format.rowLocked),
-										},
-									]}
-								>
-									<FastImage
-										style={format.logos}
-										uri={item.icon}
-									/>
-								</View>
-							</TouchableOpacity>
-						)}
+						renderItem={({ item }) => {
+							return (
+								<TouchableOpacity>
+									<View
+										style={[
+											format.row,
+											{
+												...(!item.isUnlocked &&
+													format.rowLocked),
+											},
+										]}
+									>
+										<FastImage
+											style={format.logos}
+											uri={item.icon}
+										/>
+									</View>
+								</TouchableOpacity>
+							);
+						}}
 						keyExtractor={(item) => item.id}
 						ItemSeparatorComponent={() => (
 							<Divider style={format.line} />

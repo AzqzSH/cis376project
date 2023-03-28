@@ -9,7 +9,8 @@
 			"@/lib/*": ["src/lib/*"],
 			"@/hooks/*": ["src/hooks/*"],
 			"@/api/*": ["src/api/*"],
-			"@/assets/*": ["src/assets/*"]
+			"@/assets/*": ["src/assets/*"],
+			"@/context/*": ["src/context/*"]
 		}
 	}
 }
