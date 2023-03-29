@@ -10,9 +10,11 @@ import { CompositeScreenProps } from '@react-navigation/native';
 import { ScreenProps } from '../types';
 import { MainStackNavigatorParamList } from '../AppNavigator';
 import { BottomTabParamList } from '../BottomTabNavigator';
-import { HomeLocations } from './HomeLocations';
+
 import { useGetLocations } from '@/api/points-of-interest/getLocations';
 import { PointOfInterest } from '@/api/points-of-interest';
+import { HomeScreen } from '.';
+import { FastImage } from '@/shared-components/fast-image';
 
 interface HomeScreenProps
 	extends CompositeScreenProps<
@@ -37,6 +39,7 @@ const HomeScreenImages: React.FC<HomeScreenProps> = ({ navigation }) => {
 				/>
 				<IconButton
 					style={{ marginLeft: 10 }}
+					
 					icon={
 						<Icon
 							as={MaterialCommunityIcons}
@@ -58,7 +61,29 @@ const HomeScreenImages: React.FC<HomeScreenProps> = ({ navigation }) => {
 					data={locations}
 					
 					renderItem={({item})=>(
-					<HomeLocations info ={item}/>
+					
+
+					//<HomeLocations info={item} />
+					<View style={format.box}>
+					<View>
+						<FastImage
+							style={format.imageone}
+                            uri={item.image}
+							
+						/>
+					</View>
+					<View style={format.thinline}></View>
+
+					<Button
+						// mode="contained"  !This fixes the button
+					
+						
+						onPress={() => {const x1=displayer(item.name); navigation.navigate(x1)}}
+						style={format.button}
+					>
+						<Text style={format.buttonText}>{item.name}</Text>
+					</Button>
+					</View>
 				
 				)}
 					
@@ -74,7 +99,10 @@ const HomeScreenImages: React.FC<HomeScreenProps> = ({ navigation }) => {
 			</View>
 	);
 };
-
+function displayer(x: any){
+	return x;
+	
+};
 const format = StyleSheet.create({
 	s:{
 		flex:1,
@@ -143,6 +171,48 @@ const format = StyleSheet.create({
 		marginHorizontal: 30,
 		resizeMode: 'contain',
 	},
+	button: {
+		//backgroundColor: ThemeColors.secondary, // need to take out the background color to make the button ripple effect work
+		borderColor: ThemeColors.secondary,
+		borderWidth: 0.2,
+		borderRadius: 5,
+		maxHeight: 40,
+		bottom: -10,
+	},
+	imageone: {
+		height: 85,
+		width: 100,
+		marginVertical: 10,
+		marginBottom: 20,
+		//marginHorizontal:26,
+		borderColor: ThemeColors.secondary,
+		borderWidth: 1,
+		borderRadius: 3,
+		// resizeMode: 'contains',
+	},
+	buttonText: {
+		textAlign: 'center',
+		fontSize: 11,
+		fontWeight: 'bold',
+		color: ThemeColors.secondary,
+	},
+	box: {
+		width: 150,
+		height: 180,
+		borderColor: ThemeColors.primary,
+		borderWidth: 5,
+		alignItems: 'center',
+		//marginVertical:200,
+		//marginHorizontal:30,
+		marginBottom: 35,
+		backgroundColor: ThemeColors.primary,
+		flexDirection: 'column',
+		borderRadius: 10,
+	},
 });
 
 export default HomeScreenImages;
+function tri(x: any) {
+	throw new Error('Function not implemented.');
+}
+
