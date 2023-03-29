@@ -61,6 +61,7 @@ const HomeScreenImages: React.FC<HomeScreenProps> = ({ navigation }) => {
 					data={locations}
 					
 					renderItem={({item})=>(
+					
 
 					//<HomeLocations info={item} />
 					<View style={format.box}>
@@ -75,7 +76,9 @@ const HomeScreenImages: React.FC<HomeScreenProps> = ({ navigation }) => {
 
 					<Button
 						// mode="contained"  !This fixes the button
-						onPress={() => {navigation.navigate('UC')}}
+					
+						
+						onPress={() => {const x1=displayer(item.name); navigation.navigate(x1)}}
 						style={format.button}
 					>
 						<Text style={format.buttonText}>{item.name}</Text>
@@ -96,7 +99,10 @@ const HomeScreenImages: React.FC<HomeScreenProps> = ({ navigation }) => {
 			</View>
 	);
 };
-
+function displayer(x: any){
+	return x;
+	
+};
 const format = StyleSheet.create({
 	s:{
 		flex:1,
@@ -206,3 +212,7 @@ const format = StyleSheet.create({
 });
 
 export default HomeScreenImages;
+function tri(x: any) {
+	throw new Error('Function not implemented.');
+}
+

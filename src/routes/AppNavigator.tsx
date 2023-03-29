@@ -18,9 +18,9 @@ export type MainStackNavigatorParamList = {
 	ExploreCampus: undefined;
 	Help: undefined;
 	Settings: undefined;
-	UC: undefined;
-	ELB: undefined;
-	ML: undefined;
+	University_Center: undefined;
+	Engineering_Lab: undefined;
+	Mardigian_Library: undefined;
 	
 	
 };
@@ -100,7 +100,7 @@ export const AppNavigator = () => {
 			/>
 			<Stack.Screen
 				component={UC}
-				name="UC"
+				name="University_Center"
 				options={({ navigation }) => ({
 					headerRight: () => <NavButtons navigation={navigation} />,
 					headerShown: true,
@@ -109,7 +109,7 @@ export const AppNavigator = () => {
 			/>
 			<Stack.Screen
 				component={ELB}
-				name="ELB"
+				name="Engineering_Lab"
 				options={({ navigation }) => ({
 					headerRight: () => <NavButtons navigation={navigation} />,
 					headerShown: true,
@@ -118,7 +118,7 @@ export const AppNavigator = () => {
 			/>
 			<Stack.Screen
 				component={ML}
-				name="ML"
+				name='Mardigian_Library'
 				options={({ navigation }) => ({
 					headerRight: () => <NavButtons navigation={navigation} />,
 					headerShown: true

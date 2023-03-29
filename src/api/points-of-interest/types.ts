@@ -4,5 +4,6 @@ export type PointOfInterest = {
 	image: string;
 	latitude: number;
 	longitude: number;
+	page: string;
 	isUnlocked?: boolean;
 };
