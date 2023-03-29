@@ -78,7 +78,7 @@ const HomeScreenImages: React.FC<HomeScreenProps> = ({ navigation }) => {
 						// mode="contained"  !This fixes the button
 					
 						
-						onPress={() => {const x1=displayer(item.name); navigation.navigate(x1)}}
+						onPress={() => {const x1=displayer(item.page); navigation.navigate(x1)}}
 						style={format.button}
 					>
 						<Text style={format.buttonText}>{item.name}</Text>
