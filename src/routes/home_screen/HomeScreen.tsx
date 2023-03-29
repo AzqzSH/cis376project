@@ -16,6 +16,8 @@ import { PointOfInterest } from '@/api/points-of-interest';
 import { HomeScreen } from '.';
 import { FastImage } from '@/shared-components/fast-image';
 
+
+
 interface HomeScreenProps
 	extends CompositeScreenProps<
 		ScreenProps<BottomTabParamList, 'HomeScreen'>,
@@ -78,7 +80,12 @@ const HomeScreenImages: React.FC<HomeScreenProps> = ({ navigation }) => {
 						// mode="contained"  !This fixes the button
 					
 						
-						onPress={() => {const x1=displayer(item.page); navigation.navigate(x1)}}
+						onPress={() => {const x1=displayer(item.page); navigation.navigate('Location',{
+							itemname: item.name,
+							itemimage: item.image,
+							iteminfo: item.page,
+						});
+					}}
 						style={format.button}
 					>
 						<Text style={format.buttonText}>{item.name}</Text>
@@ -100,6 +107,7 @@ const HomeScreenImages: React.FC<HomeScreenProps> = ({ navigation }) => {
 	);
 };
 function displayer(x: any){
+	global.namesss=x;
 	return x;
 	
 };
