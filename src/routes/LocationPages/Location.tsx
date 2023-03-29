@@ -3,25 +3,26 @@ import { SafeAreaView } from "react-native";
 import { View,Button, Image,StyleSheet, Text} from "react-native";
 import { Title } from "react-native-paper";
 
-export function ML(){
+const L=({route})=>{
+	const{itemname,itemimage,iteminfo}=route.params;
+	//const{itemimage}=route.params;
     return(
     <SafeAreaView style={format.box}>
 		<View style={format.topBar}>
-				<Title style={format.text}>Mardigian Library</Title>
+				<Text style={format.text}>{itemname}</Text>
 			</View>
         <View style={format.sbox}>
 		
 						<Image
 							style={format.imageone}
 							source={{
-								uri:'https://cdn.discordapp.com/attachments/1062450289468252306/1073368870674513951/PXL_20230209_221722772.PORTRAIT.jpg'
+								uri:itemimage
                                 
 							}}
 						/>
 						
 						<Text style={format.textbox}>
-							The Mardigian Library is your source for books, laptops, and more. Stop by for research 
-                            help, events, and study sessions. 
+							{iteminfo}
 						</Text>
 					</View>
                  
@@ -70,11 +71,11 @@ const format = StyleSheet.create({
 	topBar: {
 		alignItems: 'center',
 		paddingHorizontal: 20,
-        paddingVertical:20,
 		backgroundColor: ThemeColors.primary,
 		display: 'flex',
 		flexDirection: 'row',
 		paddingBottom: 20,
+		paddingTop:20
 	},
     aText: {
 		textAlign: 'center',
@@ -89,4 +90,4 @@ const format = StyleSheet.create({
 	},
 
 });
-export default ML;
+export default L;

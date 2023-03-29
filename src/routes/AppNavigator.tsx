@@ -7,9 +7,8 @@ import { Icon as ButtonIcon } from '@/shared-components/icon';
 import { IconButton } from '@/shared-components/icon-button';
 import { ScreenProps } from './types';
 import { BottomTabNavigator } from './BottomTabNavigator';
-import { UC } from './LocationPages';
-import ELB from './LocationPages/ELB';
-import ML from './LocationPages/ML';
+import { L} from './LocationPages';
+
 
 
 
@@ -18,9 +17,9 @@ export type MainStackNavigatorParamList = {
 	ExploreCampus: undefined;
 	Help: undefined;
 	Settings: undefined;
-	UC: undefined;
-	ELB: undefined;
-	ML: undefined;
+	Location: undefined;
+	
+
 	
 	
 };
@@ -98,33 +97,17 @@ export const AppNavigator = () => {
 					
 				})}
 			/>
+		
 			<Stack.Screen
-				component={UC}
-				name="UC"
+				component={L}
+				name="Location"
 				options={({ navigation }) => ({
 					headerRight: () => <NavButtons navigation={navigation} />,
 					headerShown: true,
 					
 				})}
 			/>
-			<Stack.Screen
-				component={ELB}
-				name="ELB"
-				options={({ navigation }) => ({
-					headerRight: () => <NavButtons navigation={navigation} />,
-					headerShown: true,
-					
-				})}
-			/>
-			<Stack.Screen
-				component={ML}
-				name='ML'
-				options={({ navigation }) => ({
-					headerRight: () => <NavButtons navigation={navigation} />,
-					headerShown: true
-					
-				})}
-			/>
+			
 			
 			
 		</Stack.Navigator>
