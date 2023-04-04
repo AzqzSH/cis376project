@@ -23,7 +23,6 @@ const AchievementScreen: React.FC<AchievementScreenProps> = ({}) => {
 		isFetching,
 		isLoading,
 		refetch,
-		error,
 	} = useGetAchievements();
 
 	return (

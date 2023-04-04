@@ -6,11 +6,12 @@ import { CompositeScreenProps } from '@react-navigation/native';
 import { AchievementScreen } from './achievements-screen';
 import { MainStackNavigatorParamList } from './AppNavigator';
 import { HomeScreen } from './home_screen';
+import { LeaderboardScreen } from './leaderboard-screen';
 import { LocationsStack } from './locations-stack';
 import { ScreenProps } from './types';
 
 export type BottomTabParamList = {
-	Map: undefined;
+	Locations: undefined;
 	Achievements: undefined;
 	Leaderboard: undefined;
 	HomeScreen: undefined;
@@ -32,7 +33,7 @@ const TAB_ICON: TabNavigatorMap<
 	BottomTabParamList,
 	typeof MaterialCommunityIcons
 > = {
-	Map: 'map-marker-radius',
+	Locations: 'map-marker-radius',
 	Achievements: 'trophy',
 	Leaderboard: 'equalizer',
 	HomeScreen: 'home',
@@ -70,8 +71,8 @@ export const BottomTabNavigator = () => (
 		}}
 	>
 		<BottomTab.Screen name="HomeScreen" component={HomeScreen} />
-		<BottomTab.Screen name="Leaderboard" component={LocationsStack} />
-		<BottomTab.Screen name="Map" component={LocationsStack} />
+		<BottomTab.Screen name="Leaderboard" component={LeaderboardScreen} />
+		<BottomTab.Screen name="Locations" component={LocationsStack} />
 		<BottomTab.Screen name="Achievements" component={AchievementScreen} />
 	</BottomTab.Navigator>
 );
