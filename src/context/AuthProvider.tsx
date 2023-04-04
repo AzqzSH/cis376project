@@ -19,6 +19,8 @@ export const AuthProvider: React.FC<{
 }> = ({ children }) => {
 	const { data: user, isLoading, refetch } = useMeQuery();
 
+	console.log(isLoading, user)
+
 	if (isLoading) {
 		return (
 			<View

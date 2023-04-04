@@ -1,5 +1,4 @@
 import { useGetLocations } from '@/api/points-of-interest/getLocations';
-import { useStore, useStoreSetter, useStoreValue } from '@/lib/store';
 import { ThemeColors } from '@/lib/theme';
 import { BottomTabScreenProps } from '@/routes/BottomTabNavigator';
 import { ScreenProps } from '@/routes/types';

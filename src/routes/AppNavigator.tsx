@@ -7,21 +7,18 @@ import { Icon as ButtonIcon } from '@/shared-components/icon';
 import { IconButton } from '@/shared-components/icon-button';
 import { ScreenProps } from './types';
 import { BottomTabNavigator } from './BottomTabNavigator';
-import { L} from './LocationPages';
-
-
-
+import { LocationScreen } from './location-screen';
 
 
 export type MainStackNavigatorParamList = {
 	ExploreCampus: undefined;
 	Help: undefined;
 	Settings: undefined;
-	Location: undefined;
-	
-
-	
-	
+	Location: {
+		itemName: string;
+		itemInfo: string;
+		itemImage: string;
+	};
 };
 
 const Stack = createNativeStackNavigator<MainStackNavigatorParamList>();
@@ -99,7 +96,7 @@ export const AppNavigator = () => {
 			/>
 		
 			<Stack.Screen
-				component={L}
+				component={LocationScreen}
 				name="Location"
 				options={({ navigation }) => ({
 					headerRight: () => <NavButtons navigation={navigation} />,

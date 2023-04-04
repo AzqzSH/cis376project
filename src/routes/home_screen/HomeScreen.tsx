@@ -1,36 +1,33 @@
-import { Icon } from '@/shared-components/icon';
-import { IconButton } from '@/shared-components/icon-button';
-import React from 'react';
-import { View, Image, Alert, FlatList } from 'react-native';
-import { Text, Button } from 'react-native-paper';
-import { StyleSheet,ScrollView,SafeAreaView } from 'react-native';
-import { ThemeColors } from '@/lib/theme';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { CompositeScreenProps } from '@react-navigation/native';
-import { ScreenProps } from '../types';
-import { MainStackNavigatorParamList } from '../AppNavigator';
-import { BottomTabParamList } from '../BottomTabNavigator';
+import { Icon } from "@/shared-components/icon";
+import { IconButton } from "@/shared-components/icon-button";
+import React from "react";
+import { View, Image, FlatList } from "react-native";
+import { Text, Button } from "react-native-paper";
+import { StyleSheet, SafeAreaView } from "react-native";
+import { ThemeColors } from "@/lib/theme";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { CompositeScreenProps } from "@react-navigation/native";
+import { ScreenProps } from "../types";
+import { MainStackNavigatorParamList } from "../AppNavigator";
+import { BottomTabParamList } from "../BottomTabNavigator";
 
-import { useGetLocations } from '@/api/points-of-interest/getLocations';
-import { PointOfInterest } from '@/api/points-of-interest';
-import { HomeScreen } from '.';
-import { FastImage } from '@/shared-components/fast-image';
-
-
+import { useGetLocations } from "@/api/points-of-interest/getLocations";
+import { FastImage } from "@/shared-components/fast-image";
 
 interface HomeScreenProps
 	extends CompositeScreenProps<
-		ScreenProps<BottomTabParamList, 'HomeScreen'>,
-		ScreenProps<MainStackNavigatorParamList, 'ExploreCampus'>
+		ScreenProps<BottomTabParamList, "HomeScreen">,
+		ScreenProps<MainStackNavigatorParamList, "ExploreCampus">
 	> {}
 
 const HomeScreenImages: React.FC<HomeScreenProps> = ({ navigation }) => {
-	const{data: locations, isFetching:loading}=useGetLocations();
+	const { data: locations, isFetching: loading } = useGetLocations();
+	
 	return (
 		<View style={format.main}>
 			<View style={format.topbar}>
 				<IconButton
-					onPress={() => navigation.navigate('Help')}
+					onPress={() => navigation.navigate("Help")}
 					icon={
 						<Icon
 							as={MaterialCommunityIcons}
@@ -41,131 +38,99 @@ const HomeScreenImages: React.FC<HomeScreenProps> = ({ navigation }) => {
 				/>
 				<IconButton
 					style={{ marginLeft: 10 }}
-					
-					icon={
-						<Icon
-							as={MaterialCommunityIcons}
-							name="cog"
-							size={25}
-						/>
-					}
+					icon={<Icon as={MaterialCommunityIcons} name="cog" size={25} />}
 				/>
 			</View>
 
-			<Image style={format.logo} source={require('@/assets/logo.png')} />
+			<Image style={format.logo} source={require("@/assets/logo.png")} />
 
 			<View style={format.line}></View>
 			<View style={format.line2}></View>
-			
-		 				<SafeAreaView style={format.s}>
-				<FlatList style={format.fl} showsVerticalScrollIndicator={false}
-				
+
+			<SafeAreaView style={format.s}>
+				<FlatList
+					style={format.fl}
+					showsVerticalScrollIndicator={false}
 					data={locations}
-					
-					renderItem={({item})=>(
-					
+					renderItem={({ item }) => (
+						// <HomeLocations info={item} />
+						<View style={format.box}>
+							<View>
+								<FastImage style={format.imageone} uri={item.image} />
+							</View>
+							<View style={format.thinline}></View>
 
-					//<HomeLocations info={item} />
-					<View style={format.box}>
-					<View>
-						<FastImage
-							style={format.imageone}
-                            uri={item.image}
-							
-						/>
-					</View>
-					<View style={format.thinline}></View>
+							<Button
+								// mode="contained"  !This fixes the button
 
-					<Button
-						// mode="contained"  !This fixes the button
-					
-						
-						onPress={() => {const x1=displayer(item.page); navigation.navigate('Location',{
-							itemname: item.name,
-							itemimage: item.image,
-							iteminfo: item.page,
-						});
-					}}
-						style={format.button}
-					>
-						<Text style={format.buttonText}>{item.name}</Text>
-					</Button>
-					</View>
-				
-				)}
-					
-					keyExtractor={(item)=>item.id}
-
-					/>
-
-                </SafeAreaView>
-			
-			
-				
-				
-			</View>
+								onPress={() => {
+									navigation.navigate("Location", {
+										itemName: item.name,
+										itemImage: item.image,
+										itemInfo: item.page,
+									});
+								}}
+								style={format.button}
+							>
+								<Text style={format.buttonText}>{item.name}</Text>
+							</Button>
+						</View>
+					)}
+					keyExtractor={(item) => item.id}
+				/>
+			</SafeAreaView>
+		</View>
 	);
 };
-function displayer(x: any){
-	global.namesss=x;
-	return x;
-	
-};
+
 const format = StyleSheet.create({
-	s:{
-		flex:1,
+	s: {
+		flex: 1,
 		marginTop: -40,
-		
-		backgroundColor:'white',
-		
-		alignItems:'center'
-		
+
+		backgroundColor: "white",
+
+		alignItems: "center",
 	},
-	fl:{
-		flex:1,
-		
-		
-		
+	fl: {
+		flex: 1,
 	},
 	main: {
-		backgroundColor: 'cornflowerblue',
+		backgroundColor: "cornflowerblue",
 		flex: 1,
 	},
 	topbar: {
 		top: 40,
 		right: 0,
-		flexDirection: 'row',
-		position: 'absolute',
+		flexDirection: "row",
+		position: "absolute",
 		padding: 10,
 		zIndex: 999,
 	},
 	bar: {
-		backgroundColor: 'gray',
+		backgroundColor: "gray",
 		height: 180,
 		width: 250,
 		marginHorizontal: 30,
 		marginVertical: 10,
 	},
-	
-	
+
 	line: {
 		backgroundColor: ThemeColors.secondary,
 		borderColor: ThemeColors.secondary,
 		borderWidth: 10,
 		// borderRadius:5,
 		marginVertical: -40,
-		
 	},
 	line2: {
-		backgroundColor: 'white',
+		backgroundColor: "white",
 		borderColor: "white",
 		borderWidth: 10,
 		// borderRadius:5,
 		marginVertical: 40,
-		
 	},
 	thinline: {
-		backgroundColor: 'white',
+		backgroundColor: "white",
 		width: 125,
 		height: 0.2,
 		// borderRadius:5,
@@ -177,7 +142,7 @@ const format = StyleSheet.create({
 		width: 250,
 		marginVertical: 10,
 		marginHorizontal: 30,
-		resizeMode: 'contain',
+		resizeMode: "contain",
 	},
 	button: {
 		//backgroundColor: ThemeColors.secondary, // need to take out the background color to make the button ripple effect work
@@ -199,9 +164,9 @@ const format = StyleSheet.create({
 		// resizeMode: 'contains',
 	},
 	buttonText: {
-		textAlign: 'center',
+		textAlign: "center",
 		fontSize: 11,
-		fontWeight: 'bold',
+		fontWeight: "bold",
 		color: ThemeColors.secondary,
 	},
 	box: {
@@ -209,18 +174,14 @@ const format = StyleSheet.create({
 		height: 180,
 		borderColor: ThemeColors.primary,
 		borderWidth: 5,
-		alignItems: 'center',
+		alignItems: "center",
 		//marginVertical:200,
 		//marginHorizontal:30,
 		marginBottom: 35,
 		backgroundColor: ThemeColors.primary,
-		flexDirection: 'column',
+		flexDirection: "column",
 		borderRadius: 10,
 	},
 });
 
 export default HomeScreenImages;
-function tri(x: any) {
-	throw new Error('Function not implemented.');
-}
-
