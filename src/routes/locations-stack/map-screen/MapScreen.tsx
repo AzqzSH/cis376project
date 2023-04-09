@@ -19,7 +19,7 @@ import { LocationsStackParamList } from '../LocationsStack';
 interface MapScreenProps
 	extends CompositeScreenProps<
 		ScreenProps<LocationsStackParamList, 'Map'>,
-		BottomTabScreenProps<'Map'>
+		BottomTabScreenProps<'Locations'>
 	> {}
 
 const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
