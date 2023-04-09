@@ -18,7 +18,7 @@ import { LocationListItem } from './LocationListItem';
 interface LocationsListScreenProps
 	extends CompositeScreenProps<
 		ScreenProps<LocationsStackParamList, 'List'>,
-		BottomTabScreenProps<'Map'>
+		BottomTabScreenProps<'Locations'>
 	> {}
 
 const LocationsListScreen: React.FC<LocationsListScreenProps> = ({

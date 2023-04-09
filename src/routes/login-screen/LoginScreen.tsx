@@ -4,12 +4,10 @@ import { useTokenStore } from '@/lib/stores/tokenStore';
 import { paperTheme, ThemeColors } from '@/lib/theme';
 import { KeyboardDismissView } from '@/shared-components/keyboard-dismiss-view';
 import LoadingOverlay from '@/shared-components/loading-overlay/LoadingOverlay';
-import { CompositeScreenProps } from '@react-navigation/native';
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Image, KeyboardAvoidingView, Platform, View } from 'react-native';
 import { Button, Divider, Text, TextInput } from 'react-native-paper';
-import { MainStackNavigatorParamList } from '../AppNavigator';
 import { AuthNavigatorParamList } from '../AuthNavigator';
 import { ScreenProps } from '../types';
 
@@ -220,7 +218,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
 									primary: ThemeColors.primary,
 								},
 							}}
-							onPress={() => {}}
+							onPress={() => navigation.navigate('Register')}
 						>
 							Sign up
 						</Button>
