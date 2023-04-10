@@ -8,16 +8,19 @@ import { Alert } from 'react-native';
  * @param everyMs - How often to update the location in ms
  */
 export const useCurrentLocation = (everyMs: number = 3000) => {
-	const [location, setLocation] = useState<Location.LocationObject | null>(
-		null
-	);
+	const [location, setLocation] = useState<{
+		latitude: number;
+		longitude: number;
+	} | null>(null);
 
 	useEffect(() => {
 		let interval: NodeJS.Timeout | null = null;
 
-		async () => {
+		(async () => {
 			const { status } =
 				await Location.requestForegroundPermissionsAsync();
+
+			console.log(status);
 
 			if (status !== 'granted') {
 				Alert.alert(
@@ -30,9 +33,12 @@ export const useCurrentLocation = (everyMs: number = 3000) => {
 			interval = setInterval(async () => {
 				const location = await Location.getCurrentPositionAsync({});
 
-				setLocation(location);
+				setLocation({
+					latitude: location.coords.latitude,
+					longitude: location.coords.longitude,
+				});
 			}, everyMs);
-		};
+		})();
 
 		return () => {
 			if (interval) {
