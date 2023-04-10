@@ -8,14 +8,24 @@ import { Text } from 'react-native-paper';
 interface LocationListItemProps {
 	info: PointOfInterest;
 	unlocked?: boolean;
+	onPress?: () => void;
 }
 
 export const LocationListItem: React.FC<LocationListItemProps> = ({
 	info,
 	unlocked,
+	onPress,
 }) => {
 	return (
-		<TouchableOpacity style={styles.listItem}>
+		<TouchableOpacity
+			onPress={onPress}
+			style={[
+				styles.listItem,
+				{
+					...(unlocked ? {} : styles.listItemLocked),
+				},
+			]}
+		>
 			<FastImage uri={info.image} style={styles.listItemImage} />
 
 			<View style={styles.listItemContent}>
@@ -32,6 +42,9 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		padding: 20,
 		height: 100,
+	},
+	listItemLocked: {
+		opacity: 0.5,
 	},
 	listItemImage: {
 		width: 100,

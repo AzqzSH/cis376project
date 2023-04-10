@@ -15,6 +15,9 @@ import { View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { Text } from 'react-native-paper';
 import { LocationsStackParamList } from '../LocationsStack';
+import { useCurrentLocation } from '@/hooks/useCurrentLocation';
+import { unlockLocation } from '@/api/points-of-interest/unlockLocation';
+import { StatusBar } from 'expo-status-bar';
 
 interface MapScreenProps
 	extends CompositeScreenProps<
@@ -27,7 +30,33 @@ const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
 
 	const [location, setLocation] = React.useState<PointOfInterest>();
 
-	const { data: locations, isFetching: loading } = useGetLocations();
+	const {
+		data: locations,
+		isFetching: loading,
+		isLoading,
+		refetch,
+	} = useGetLocations();
+
+	const currentLocation = useCurrentLocation(3000);
+
+	React.useEffect(() => {
+		if (!locations || !currentLocation || isLoading) return;
+
+		locations.forEach(async (location) => {
+			const distance =
+				Math.pow(currentLocation.latitude - location.latitude, 2) +
+				Math.pow(currentLocation.longitude - location.longitude, 2);
+
+			if (distance < 0.0001 && !location.isUnlocked) {
+				setLocation(location);
+				showLocationUnlocked();
+
+				await unlockLocation(location.id);
+
+				await refetch();
+			}
+		});
+	}, [currentLocation, locations]);
 
 	return (
 		<View
@@ -35,6 +64,7 @@ const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
 				flex: 1,
 			}}
 		>
+			<StatusBar style="dark" />
 			<LoadingOverlay visible={loading} />
 
 			<View
@@ -96,17 +126,23 @@ const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
 							latitude: location.latitude,
 							longitude: location.longitude,
 						}}
-						onPress={() => {
-							setLocation(location);
-							showLocationUnlocked();
-						}}
-						pinColor={ThemeColors.primary}
+						title={location.name}
+						pinColor={
+							location.isUnlocked ? ThemeColors.primary : 'grey'
+						}
 					/>
 				))}
 			</MapView>
 
 			{location && (
 				<PlaceUnlockedPopup
+					onViewPlace={() => {
+						navigation.navigate('Location', {
+							itemImage: location.image,
+							itemName: location.name,
+							itemInfo: location.page,
+						});
+					}}
 					pointOfInterest={location}
 					{...locationUnlockedModal}
 				/>
