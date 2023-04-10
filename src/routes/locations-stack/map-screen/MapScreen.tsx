@@ -19,6 +19,34 @@ import { useCurrentLocation } from '@/hooks/useCurrentLocation';
 import { unlockLocation } from '@/api/points-of-interest/unlockLocation';
 import { StatusBar } from 'expo-status-bar';
 
+/**
+ *
+ * @param lat1 latitude of first point
+ * @param lon1 longitude of first point
+ * @param lat2 latitude of second point
+ * @param lon2 longitude of second point
+ * @returns distance in meters
+ */
+function calculateDistance(
+	lat1: number,
+	lon1: number,
+	lat2: number,
+	lon2: number
+): number {
+	const earthRadius = 6371e3; // meters
+	const φ1 = (lat1 * Math.PI) / 180;
+	const φ2 = (lat2 * Math.PI) / 180;
+	const Δφ = ((lat2 - lat1) * Math.PI) / 180;
+	const Δλ = ((lon2 - lon1) * Math.PI) / 180;
+
+	const a =
+		Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+		Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+	const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+	return earthRadius * c;
+}
+
 interface MapScreenProps
 	extends CompositeScreenProps<
 		ScreenProps<LocationsStackParamList, 'Map'>,
@@ -43,11 +71,14 @@ const MapScreen: React.FC<MapScreenProps> = ({ navigation }) => {
 		if (!locations || !currentLocation || isLoading) return;
 
 		locations.forEach(async (location) => {
-			const distance =
-				Math.pow(currentLocation.latitude - location.latitude, 2) +
-				Math.pow(currentLocation.longitude - location.longitude, 2);
+			const distance = calculateDistance(
+				currentLocation.latitude,
+				currentLocation.longitude,
+				location.latitude,
+				location.longitude
+			);
 
-			if (distance < 0.0001 && !location.isUnlocked) {
+			if (distance < 10 && !location.isUnlocked) {
 				setLocation(location);
 				showLocationUnlocked();
 
