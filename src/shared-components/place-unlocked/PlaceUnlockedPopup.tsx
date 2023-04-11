@@ -8,10 +8,12 @@ import { FastImage } from '@/shared-components/fast-image';
 
 interface PlaceUnlockedPopupProps extends IModalProps {
 	pointOfInterest: PointOfInterest;
+	onViewPlace: () => void;
 }
 
 const PlaceUnlockedPopup: React.FC<PlaceUnlockedPopupProps> = ({
 	pointOfInterest,
+	onViewPlace,
 	...modalProps
 }) => {
 	return (
@@ -108,7 +110,7 @@ const PlaceUnlockedPopup: React.FC<PlaceUnlockedPopupProps> = ({
 					style={{
 						borderRadius: 10,
 					}}
-					onPress={() => {}}
+					onPress={onViewPlace}
 				>
 					<Text
 						style={{

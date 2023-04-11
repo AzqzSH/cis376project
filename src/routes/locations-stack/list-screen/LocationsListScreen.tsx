@@ -18,7 +18,7 @@ import { LocationListItem } from './LocationListItem';
 interface LocationsListScreenProps
 	extends CompositeScreenProps<
 		ScreenProps<LocationsStackParamList, 'List'>,
-		BottomTabScreenProps<'Map'>
+		BottomTabScreenProps<'Locations'>
 	> {}
 
 const LocationsListScreen: React.FC<LocationsListScreenProps> = ({
@@ -40,7 +40,19 @@ const LocationsListScreen: React.FC<LocationsListScreenProps> = ({
 			<View style={styles.content}>
 				<FlatList
 					data={locations}
-					renderItem={({ item }) => <LocationListItem info={item} />}
+					renderItem={({ item }) => (
+						<LocationListItem
+							info={item}
+							unlocked={item.isUnlocked}
+							onPress={() => {
+								navigation.navigate('Location', {
+									itemImage: item.image,
+									itemName: item.name,
+									itemInfo: item.page,
+								});
+							}}
+						/>
+					)}
 					keyExtractor={(item) => item.id}
 					ItemSeparatorComponent={() => (
 						<Divider
